@@ -75,15 +75,10 @@
 #define warn( x )  message( __FILE__LINE__ #x "\n" ) 
 
 // You need to uncomment this if you are using MFC
-#pragma warn( You need to uncomment this if you are using MFC )
+//#pragma warn( You need to uncomment this if you are using MFC )
 //#include "stdafx.h"
 
 #include "Model_3DS.h"
-
-#include <iostream>
-
-#include <math.h>			// Header file for the math library
-#include <gl\gl.h>			// Header file for the OpenGL32 library
 
 // The chunk's id numbers
 #define MAIN3DS				0x4D4D
@@ -159,7 +154,7 @@ Model_3DS::Model_3DS()
 
 	// Set up the path
 	path = new char[80];
-	sprintf(path, "");
+  memset(path, 0, 80);
 
 	// Zero out our counters for MFC
 	numObjects = 0;
@@ -627,7 +622,7 @@ void Model_3DS::MaterialNameChunkProcessor(long length, long findex, int matinde
 		Materials[matindex].name[i] = fgetc(bin3ds);
 		if (Materials[matindex].name[i] == 0)
 		{
-			Materials[matindex].name[i] = NULL;
+			Materials[matindex].name[i] = '\0';
 			break;
 		}
 	}
@@ -780,7 +775,7 @@ void Model_3DS::MapNameChunkProcessor(long length, long findex, int matindex)
 		name[i] = fgetc(bin3ds);
 		if (name[i] == 0)
 		{
-			name[i] = NULL;
+			name[i] = '\0';
 			break;
 		}
 	}
@@ -811,7 +806,7 @@ void Model_3DS::ObjectChunkProcessor(long length, long findex, int objindex)
 		Objects[objindex].name[i] = fgetc(bin3ds);
 		if (Objects[objindex].name[i] == 0)
 		{
-			Objects[objindex].name[i] = NULL;
+			Objects[objindex].name[i] = '\0';
 			break;
 		}
 	}
@@ -1131,7 +1126,7 @@ void Model_3DS::FacesMaterialsListChunkProcessor(long length, long findex, int o
 		name[i] = fgetc(bin3ds);
 		if (name[i] == 0)
 		{
-			name[i] = NULL;
+			name[i] = '\0';
 			break;
 		}
 	}

@@ -1,50 +1,22 @@
 #include <GL/glew.h>
 #include <GL/gl.h>
 #include <GL/glut.h>
-//#include <windows.h>
 #include <stdio.h>
 #include <stdlib.h>
 
 #include "Model_3DS.h"
 
-#include <iostream>
-
 using namespace std;
-
-GLfloat angle = 0.0;
 
 Model_3DS obj; //create object
 
-void FreeTexture( GLuint texture )
-{
-  glDeleteTextures( 1, &texture ); 
-}
-
-void square (void) {
-  //*obj.Materials->tex.texture = texture;
-  glBindTexture( GL_TEXTURE_2D, *obj.Materials->tex.texture ); //bind our texture to our shape
+void draw (void) {
   
-  glTranslatef(0.0,0.0,-10.0f);
-  //glRotatef(45, 1.0,1.0,1.0);
-  /*
-  glBegin(GL_QUADS);
-    
-  glNormal3f(0.0, 1.0f, 0.0f);
-  glTexCoord2f(0.0f, 0.0f);
-  glVertex3f(-2.5f, -2.5f, 2.5f);
-  glTexCoord2f(1.0f, 0.0f);
-  glVertex3f(2.5f, -2.5f, 2.5f);
-  glTexCoord2f(1.0f, 1.0f);
-  glVertex3f(2.5f, -2.5f, -2.5f);
-  glTexCoord2f(0.0f, 1.0f);
-  glVertex3f(-2.5f, -2.5f, -2.5f);
-
-  glEnd();**/
-  
-  
+  //rotate object
   obj.rot.x += 0.02;
   obj.rot.y += 0.02;
   
+  //draw object
   obj.Draw();
 }
 
@@ -54,9 +26,8 @@ void display (void) {
     glLoadIdentity(); 
     glEnable( GL_TEXTURE_2D );
     gluLookAt (0.0, 0.0, 5.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
-    square();
+    draw();
     glutSwapBuffers();
-    angle += 0.2;
 }
 void reshape (int w, int h) {
     glViewport (0, 0, (GLsizei)w, (GLsizei)h);
@@ -76,6 +47,7 @@ int main (int argc, char **argv) {
     glutIdleFunc (display);
     glutReshapeFunc (reshape);
     
+    //load object
     obj.Load("C:\\metoritewars\\objects\\player\\test.3ds");
     
     //enabling light object does not print right without light

@@ -80,7 +80,11 @@
 // Just replace this with your favorite texture class
 #include "GLTexture.h"
 
-#include <windows.h>
+
+#include <iostream>
+
+#include <math.h>			// Header file for the math library
+#include <gl\gl.h>			// Header file for the OpenGL32 library
 #include <stdio.h>
 
 class Model_3DS  

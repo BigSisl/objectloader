@@ -37,10 +37,15 @@
 #ifndef GLTEXTURE_H
 #define GLTEXTURE_H
 
+
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <iostream> 
 #include <GL\glew.h>
 #include <gl\gl.h>			// Header File For The OpenGL32 Library
 #include <gl\glu.h>			// Header File For The GLu32 Library
-#include <windows.h>
+//#include <windows.h>
 
 class GLTexture  
 {
