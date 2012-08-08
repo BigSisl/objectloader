@@ -195,7 +195,7 @@ void Model_3DS::Load(char *name)
 	// strip "'s
 	if (strstr(name, "\""))
 		name = strtok(name, "\"");
-
+  
 	// Find the path
 	if (strstr(name, "/") || strstr(name, "\\"))
 	{
@@ -226,12 +226,12 @@ void Model_3DS::Load(char *name)
 	// Load the file
 	bin3ds = fopen(name,"rb");
         
-        //check if file exists
-        if(bin3ds == NULL) {
-        
-            fprintf(stderr, "file couldn't open");
-            exit(EXIT_FAILURE);
-        }
+  //check if file exists
+  if(bin3ds == NULL) {
+
+      fprintf(stderr, "file couldn't open");
+      exit(EXIT_FAILURE);
+  }
 
 	// Make sure we are at the beginning
 	fseek(bin3ds, 0, SEEK_SET);
@@ -670,7 +670,7 @@ void Model_3DS::DiffuseColorChunkProcessor(long length, long findex, int matinde
 				// A rgb gamma corrected int color chunk
 				IntColorChunkProcessor(h.len, ftell(bin3ds), matindex);
 				break;
-			default			:
+			default:
 				break;
 		}
 
@@ -773,6 +773,7 @@ void Model_3DS::MapNameChunkProcessor(long length, long findex, int matindex)
 	// chunk's data findex + the size of the header
 	fseek(bin3ds, findex, SEEK_SET);
 
+  
 	// Read the name of the texture
 	for (int i = 0; i < 80; i++)
 	{
@@ -788,7 +789,6 @@ void Model_3DS::MapNameChunkProcessor(long length, long findex, int matindex)
 	char fullname[80];
 	sprintf(fullname, "%s%s", path, name);
 	Materials[matindex].tex.Load(fullname);
-  std::cout << fullname << std::endl;
 	Materials[matindex].textured = true;
 
 	// move the file pointer back to where we got it so

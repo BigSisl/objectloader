@@ -80,6 +80,7 @@
 // Just replace this with your favorite texture class
 #include "GLTexture.h"
 
+#include <windows.h>
 #include <stdio.h>
 
 class Model_3DS  
